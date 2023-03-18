@@ -1,0 +1,90 @@
+* {
+    font-family: "Roboto";
+}
+
+.navbar {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.regsearch {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.textbox {
+    flex-basis: 100%;
+}
+
+input[type=text] {
+    padding: 10px 15px;
+    font-size: 5vh;
+    border: 1px solid lightgray;
+    border-radius: 40px;
+}
+
+input[type=submit] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+input[type=submit]:hover {
+    border: 1px solid lightgray;
+    cursor: pointer;
+}
+
+input[type=submit]:active {
+    border: 1px solid lightskyblue;
+    cursor: pointer;
+}
+
+form > div {
+   flex-basis: 20vw;
+}
+
+.advsearch > input[type=text] {
+    font-size: 2vh;
+    flex-basis: 27vw !important;
+    border-radius: 2px;
+}
+
+.advsearch {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50vw;
+    justify-content: end;
+    gap: 10px;
+}
+
+.advsearch > input[type=submit] {
+    background-color: cornflowerblue;
+    border-radius: 2px;
+    color: white;
+    font-weight: 500;
+}
+
+.advsearch > input[type=submit]:active {
+    cursor: pointer;
+    background-color: mediumblue;
+}
