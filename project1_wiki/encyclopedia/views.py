@@ -3,8 +3,7 @@ from django import forms
 from django.http import HttpResponseNotFound
 from django.http import HttpResponseRedirect
 from django.http import HttpResponseForbidden
-from django.urls import reverse
-from django.urls import resolve
+from random import choice
 from . import util
 import markdown
 
@@ -98,3 +97,6 @@ def edit(request, title):
         "editEntry": EditEntry(initial={'content': util.get_entry(title)}),
         "title": title
     })
+
+def random(request):
+    return HttpResponseRedirect(f"../../../wiki/{ choice(util.list_entries()) }")
