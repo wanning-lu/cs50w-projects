@@ -1,3 +1,63 @@
+:root {
+    --hover-color: whitesmoke;
+}
+
 body {
     padding: 10px;
+}
+
+label, input {
+    margin-bottom: 1vh;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+    background-color: var(--hover-color);
+}
+
+.listing {
+    height: 20vh;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+}
+
+.listing:hover {
+    background-color: var(--hover-color);
+}
+
+.listing-img {
+    flex-basis: 0;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.listing-img img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.listing-info {
+    flex-basis: 0;
+    flex-grow: 3;
+}
+
+.specific-listing-img {
+    display: flex;
+    justify-content: center;
+}
+
+.specific-listing-img img {
+    max-height: 30vh;
+    width: auto;
+    height: auto;
 }

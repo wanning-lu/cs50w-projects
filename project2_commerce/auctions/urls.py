@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from . import views
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("watchlist", views.watchlist, name="watchlist"),
     path("categories", views.categories, name="categories"),
-    path("create", views.create, name="create")
+    path("create", views.create, name="create"),
+    path("listings/<int:listingnumber>", views.listing, name="listing")
 ]
