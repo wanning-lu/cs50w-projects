@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+    
+    {% for listing in listings %}
+        <a href="{% url 'listing' listing.id %}">
+            <div class="listing">
+                <div class="listing-img">
+                    {% if listing.imgurl %}
+                        <img src="{{ listing.imgurl }}">
+                    {% else %}
+                        <img src="{% static 'auctions/notfound.png' %}">
+                    {% endif %}
+                </div>
+                <div class="listing-info">
+                    <h2>{{ listing.name }}</h2>
+                    <p>{{ listing.desc }}</p>
+                    <p><b>Price: </b>${{ listing.price.price }}</p>
+                    <p>Date created: {{ listing.dateCreated }}</p>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}

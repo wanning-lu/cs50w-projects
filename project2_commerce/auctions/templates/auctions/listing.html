@@ -1,32 +1,75 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+    {% if active %}
+    {% else %}
+        <h1>INACTIVE LISTING!!!</h1>
+    {% endif %}
     <h2>{{ listing.name }}</h2>
     <div class="specific-listing-img">
         <img src="{{ listing.imgurl }}">
     </div>
     
     <p>{{ listing.desc }}</p>
-    <p>Current bid: ${{ listing.price.price }}</p>
+    <h2>${{ listing.price.price }}</h2>
+
+    {% if active %}
+        {% if isBidder %}
+        <p>Your bid is the current bid.</p>
+        {% else %}
+        <p>Your bid is not the current bid.</p>
+        {% endif %}
+        <p class="error-message">{{ error }}</p>
+        <form action="{% url 'bid' listing.id %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Place Bid</button>
+        </form>
+    {% endif %}
+
     <h3>Details</h3>
     <ul>
         <li>Listed by: {{ listing.seller }}</li>
         <li>Category: {{ listing.category }}</li>
+        {% if active %}
+        {% else %}
+            <li>Winner: {{ listing.price.bidder }}</li>
+        {% endif %}
     </ul>
 
     {% if inWatchlist %}
-        <form action="{% url 'listing' listing.id %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Add to Watchlist">
-        </form>
+    <form action="{% url 'listing' listing.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete from Watchlist">
+    </form>
     {% else %}
-        <form action="{% url 'listing' listing.id %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Delete from Watchlist">
-        </form>
+        {% if active %}
+            <form action="{% url 'listing' listing.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Add to Watchlist">
+            </form>
+        {% endif %}
     {% endif %}
     
-    
+    {% if active %}
+        {% if isSeller %}
+        <form action="{% url 'close' listing.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Close Listing</button>
+        </form>
+        {% endif %}
+
+        <form action="{% url 'comment' listing.id%}" method="post">
+            {% csrf_token %}
+            {{ comment }}
+            <button type="submit">Comment</button>
+        </form>
+    {% endif %}
+    {% for entry in comments %}
+        <h5>{{ entry.author }}</h5><p> Created {{ entry.dateCreated }}</p>
+        <p>{{ entry.content }}</p>
+    {% endfor %}
+
 {% endblock %}
 
 

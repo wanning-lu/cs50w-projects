@@ -61,3 +61,24 @@ a:hover {
     width: auto;
     height: auto;
 }
+
+.error-message {
+    color: red;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-link > * {
+    flex: 1;
+}
+
+.watchlist-count {
+    padding: 1px 5px;
+    border-radius: 3px;
+    background-color: lightgray;
+    color: white;
+}
