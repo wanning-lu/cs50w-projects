@@ -1,0 +1,1 @@
+She's working really hard to make sure she has the best coding practices down, and is currently learning web development tools and languages!
