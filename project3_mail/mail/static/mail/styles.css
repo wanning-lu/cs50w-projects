@@ -1,0 +1,22 @@
+textarea {
+    min-height: 400px;
+}
+
+.email-container {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    margin: 1vh 0;
+    padding: 5px 10px;
+    min-height: 10vh;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.email-container:hover {
+    cursor: pointer;
+    background-color: ghostwhite;
+}
+
+.email-container * {
+    pointer-events: none;
+}
