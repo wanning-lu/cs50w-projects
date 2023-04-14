@@ -1,0 +1,26 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div class="user-info">
+        <h2>{{ userProfile }}</h2>
+        <p><strong>Following: {{ userProfile.following.count }} • Followers: {{ userProfile.followers.count }}</strong></p>
+        {% if user != userProfile %}
+        <button class="follow"></button>
+        {% endif %}
+    </div>
+    
+    {% for post in posts %}
+        <div class="post">
+            {% if user == post.author %}
+            <p>Edit</p>
+            {% endif %}
+            <p class="post-content">{{ post.content }}</p>
+            <p class="post-time">{{ post.timestamp }}</p>
+            <p class="post-likes">❤️ {{ post.likes.count }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block scipt %}
+    <script src="{% static 'network/following.js' %}"></script>
+{% endblock %} 
