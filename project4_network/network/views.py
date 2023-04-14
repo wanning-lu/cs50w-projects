@@ -1,11 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django import forms
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+import json
 
 from .models import User, Post
 
@@ -30,12 +31,23 @@ def index(request):
 @login_required
 def following(request, userId):
 
+    user = User.objects.get(pk=userId)
+    # Get user's following list
+    if request.method == "GET":
+        return JsonResponse(user.serialize())
+
     # Update user's following list
     if request.method == "PUT":
         data = json.loads(request.body)
-        if data.get("following") is not None:
-            user.following.add = data["following"]
-        email.save()
+        if data.get("following") is not None and data["isFollowing"]:
+            user.following.remove(data["following"])
+        elif data.get("following") is not None:
+            user.following.add(data["following"])
+        else:
+            return JsonResponse({
+                "error": "Invalid PUT request"
+            }, status=400)
+        user.save()
         return HttpResponse(status=204)
 
     # Email must be via GET or PUT

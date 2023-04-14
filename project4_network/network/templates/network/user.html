@@ -1,9 +1,12 @@
 {% extends "network/layout.html" %}
+{% load static %}
 
 {% block body %}
-    <div class="user-info">
+    <p>{{ users }}</p>
+    <div class="profile-info" id=" {{ userProfile.id }}" style="display: none"></div>
+    <div class="user-info" id="{{ user.id }}">
         <h2>{{ userProfile }}</h2>
-        <p><strong>Following: {{ userProfile.following.count }} • Followers: {{ userProfile.followers.count }}</strong></p>
+        <p><strong>Following:</strong> <span class="following-count">{{ userProfile.following.count }}</span> • <strong>Followers:</strong> <span class="follower-count">{{ userProfile.followers.count }}</span></p>
         {% if user != userProfile %}
         <button class="follow"></button>
         {% endif %}
@@ -18,9 +21,13 @@
             <p class="post-time">{{ post.timestamp }}</p>
             <p class="post-likes">❤️ {{ post.likes.count }}</p>
         </div>
+    {% empty %}
+        <div class="nothing">
+            <div>Unfortunately, nothing to show here.</div>
+        </div>
     {% endfor %}
 {% endblock %}
 
-{% block scipt %}
+{% block script %}
     <script src="{% static 'network/following.js' %}"></script>
 {% endblock %} 
